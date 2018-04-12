@@ -1,6 +1,8 @@
 package hbase.inAction;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.Cell;
@@ -48,13 +50,37 @@ public class DemoInChapter2 {
 	public void put() throws IOException {
 
 		Table table = connection.getTable(TableName.valueOf("users"));
-		Put put=new Put("TheRealMT".getBytes());
 		
-		put.addColumn("info".getBytes(), "name".getBytes(), "Mark Twain".getBytes());
-		put.addColumn("info".getBytes(), "email".getBytes(), "samuel@clemens.org".getBytes());
-		put.addColumn("info".getBytes(), "password".getBytes(), "Langhorne".getBytes());
+		Put put1=new Put("001".getBytes());
+		put1.addColumn("info".getBytes(), "name".getBytes(), "Mark Twain".getBytes());
+		put1.addColumn("info".getBytes(), "email".getBytes(), "samuel@clemens.org".getBytes());
+		put1.addColumn("info".getBytes(), "password".getBytes(), "Langhorne".getBytes());
 		
-		table.put(put);
+		Put put2=new Put("002".getBytes());
+		put2.addColumn("info".getBytes(), "name".getBytes(), "Lora Cloud".getBytes());
+		put2.addColumn("info".getBytes(), "email".getBytes(), "Lora@clemens.org".getBytes());
+		put2.addColumn("info".getBytes(), "password".getBytes(), "123456a".getBytes());
+		
+		Put put3=new Put("003".getBytes());
+		put3.addColumn("info".getBytes(), "name".getBytes(), "Hames Rode".getBytes());
+		put3.addColumn("info".getBytes(), "email".getBytes(), "qwer@clemens.org".getBytes());
+		put3.addColumn("info".getBytes(), "password".getBytes(), "asxcdfv".getBytes());
+		put3.addColumn("info".getBytes(), "hobby".getBytes(),"baketball".getBytes());
+		
+		Put put4=new Put("004".getBytes());
+		put4.addColumn("info".getBytes(), "name".getBytes(), "QQ BZCK ".getBytes());
+		put4.addColumn("info".getBytes(), "email".getBytes(), "163@clemens.org".getBytes());
+		put4.addColumn("info".getBytes(), "password".getBytes(), "zaq123".getBytes());
+		put4.addColumn("info".getBytes(), "gender".getBytes(), "male".getBytes());
+		
+		List<Put> puts=new ArrayList<>();
+		
+		puts.add(put1);
+		puts.add(put2);
+		puts.add(put3);
+		puts.add(put4);
+		
+		table.put(puts);
 		table.close();
 		
 	}
